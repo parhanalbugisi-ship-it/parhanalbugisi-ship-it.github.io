@@ -1,0 +1,1845 @@
+/* ==========================================================================
+   DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+:root {
+    /* Color Palette (Bright Glassmorphism Theme) */
+    --bg-primary: #f1f5f9;          /* Lebih kontras dengan putih kaca */
+    --bg-secondary: #e2e8f0;        /* Slate 200 */
+    --bg-card: rgba(255, 255, 255, 0.45); /* Kaca transparan tipis */
+    --bg-card-hover: rgba(255, 255, 255, 0.65); /* Kaca lebih tebal saat hover */
+    --border-color: rgba(255, 255, 255, 0.5); /* Refleksi putih kaca di tepi */
+    --border-glow: rgba(2, 132, 199, 0.3);
+    
+    --text-primary: #0f172a;        /* Slate 900 (Sangat kontras & tajam) */
+    --text-secondary: #475569;      /* Slate 600 (Lebih lembut & modern) */
+    --text-muted: #64748b;          /* Slate 500 */
+    
+    /* Variables for card items & inputs */
+    --bg-item: rgba(15, 23, 42, 0.03);
+    --bg-input: rgba(15, 23, 42, 0.04);
+    
+    /* Brand Accents (Saturated for contrast on light background) */
+    --accent-tech: #0284c7;        /* Sky Blue */
+    --accent-tech-rgb: 2, 132, 199;
+    --accent-islamic: #059669;     /* Emerald Green */
+    --accent-islamic-rgb: 5, 150, 105;
+    --accent-martial: #d97706;     /* Amber Gold */
+    --accent-martial-rgb: 217, 119, 6;
+    --accent-cert: #7c3aed;        /* Violet Purple */
+    --accent-cert-rgb: 124, 58, 237;
+    
+    /* Vibrant Gradients */
+    --gradient-tech: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    --gradient-islamic: linear-gradient(135deg, #059669 0%, #047857 100%);
+    --gradient-martial: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+    --gradient-cert: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    --gradient-hot: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+    --gradient-text: linear-gradient(90deg, #0284c7, #059669, #d97706, #7c3aed);
+    --gradient-text-alt: linear-gradient(90deg, #db2777, #7c3aed, #0284c7, #059669);
+    
+    /* Glowing Shadows (Adapted for Light Theme) */
+    --glow-tech: 0 8px 25px rgba(2, 132, 199, 0.15), 0 0 10px rgba(2, 132, 199, 0.08);
+    --glow-islamic: 0 8px 25px rgba(5, 150, 105, 0.15), 0 0 10px rgba(5, 150, 105, 0.08);
+    --glow-martial: 0 8px 25px rgba(217, 119, 6, 0.15), 0 0 10px rgba(217, 119, 6, 0.08);
+    --glow-cert: 0 8px 25px rgba(124, 58, 237, 0.15), 0 0 10px rgba(124, 58, 237, 0.08);
+    
+    --gradient-primary: linear-gradient(135deg, var(--accent-tech), var(--accent-islamic));
+    --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
+    
+    /* Layout & Utilities */
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-arabic: 'Amiri', serif;
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+    --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 20px 40px -10px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --blur-strength: 24px;
+}
+
+/* ==========================================================================
+   RESET & CORE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    background-attachment: fixed;
+    color: var(--text-primary);
+}
+
+body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-fast);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+input, textarea, select {
+    font-family: inherit;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINERS & UTILITIES
+   ========================================================================== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.sec-padding {
+    padding: 100px 0;
+}
+
+.bg-alt {
+    background-color: var(--bg-secondary);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-subtitle {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-tech);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(120deg, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-line {
+    width: 60px;
+    height: 4px;
+    background: var(--gradient-primary);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+.highlight-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(0, 242, 254, 0.1);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    color: var(--accent-tech);
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Glassmorphism Card Style */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 28px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+}
+
+.btn-secondary {
+    background: #ffffff;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-secondary);
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* ==========================================================================
+   NAVIGATION BAR (STIKY GLASSMORPHISM)
+   ========================================================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition-fast);
+}
+
+.navbar.scrolled {
+    padding: 8px 0;
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition-fast);
+}
+
+.navbar.scrolled .nav-container {
+    padding: 12px 24px;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.logo-accent {
+    color: var(--accent-tech);
+}
+
+.nav-menu ul {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-link i {
+    font-size: 0.85rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-primary);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.nav-link.active {
+    color: var(--accent-tech);
+    background: rgba(2, 132, 199, 0.08);
+    border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+   MODUL 1: HERO SECTION
+   ========================================================================== */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 120px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin-bottom: 10px;
+}
+
+.hero-text h2.sub-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    height: 40px; /* Prevent layout shift during typing */
+}
+
+.hero-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.social-links-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--bg-item);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
+.social-icon:hover {
+    color: #ffffff;
+    background: var(--gradient-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(2, 132, 199, 0.25);
+}
+
+/* Glowing Profile Card */
+.profile-card-glowing {
+    position: relative;
+    width: 340px;
+    height: 380px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    background: var(--bg-card);
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.profile-card-glowing:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 242, 254, 0.3);
+    box-shadow: 0 15px 35px rgba(0, 242, 254, 0.15);
+}
+
+.profile-image-wrapper {
+    width: 100%;
+    height: 290px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+.profile-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-normal);
+}
+
+.profile-card-glowing:hover .profile-image-wrapper img {
+    scale: 1.05;
+}
+
+.profile-card-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 4px 0;
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.active {
+    background-color: var(--accent-islamic);
+    box-shadow: 0 0 8px var(--accent-islamic);
+    animation: pulse 1.8s infinite;
+}
+
+.status-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+}
+
+.scroll-down a {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.scroll-down a:hover {
+    color: var(--accent-tech);
+}
+
+/* ==========================================================================
+   MODUL 2: PROFIL & FILOSOFI (ABOUT ME)
+   ========================================================================== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-info h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.about-info p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.stat-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.stat-num {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent-tech);
+    margin-bottom: 4px;
+}
+
+.stat-lbl {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.about-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pillar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.pillar-card:hover {
+    transform: translateX(8px);
+    border-color: var(--border-color);
+    background: var(--bg-card-hover);
+}
+
+.pillar-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.pillar-icon.tech {
+    background: rgba(0, 242, 254, 0.1);
+    color: var(--accent-tech);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+}
+
+.pillar-icon.spirit {
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--accent-islamic);
+    border: 1px solid rgba(0, 230, 118, 0.2);
+}
+
+.pillar-icon.physical {
+    background: rgba(255, 171, 0, 0.1);
+    color: var(--accent-martial);
+    border: 1px solid rgba(255, 171, 0, 0.2);
+}
+
+.pillar-content h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.pillar-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   MODUL 3: KEAHLIAN TEKNOLOGI (WEB DEV STACK)
+   ========================================================================== */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+.tech-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    transition: var(--transition-fast);
+}
+
+.tech-card:hover {
+    transform: translateY(-8px);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.tech-card:hover::before {
+    background: var(--gradient-primary);
+}
+
+.tech-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.tech-icon.html { color: #e34f26; }
+.tech-icon.css { color: #1572b6; }
+.tech-icon.js { color: #f7df1e; }
+.tech-icon.php { color: #777bb4; }
+.tech-icon.mysql { color: #00758f; }
+
+.tech-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.tech-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    height: 72px; /* Uniform description sizing */
+    overflow: hidden;
+}
+
+.skill-bar-wrapper {
+    margin-top: auto;
+}
+
+.skill-bar-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.skill-bar-outer {
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.skill-bar-inner {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.html-bar { background-color: #e34f26; box-shadow: 0 0 10px rgba(227, 79, 38, 0.4); }
+.css-bar { background-color: #1572b6; box-shadow: 0 0 10px rgba(21, 114, 182, 0.4); }
+.js-bar { background-color: #f7df1e; box-shadow: 0 0 10px rgba(247, 223, 30, 0.4); }
+.php-bar { background-color: #777bb4; box-shadow: 0 0 10px rgba(119, 123, 180, 0.4); }
+.mysql-bar { background-color: #00758f; box-shadow: 0 0 10px rgba(0, 117, 143, 0.4); }
+
+/* ==========================================================================
+   MODUL 4: STUDI KEISLAMAN (ISLAMIC STUDIES)
+   ========================================================================== */
+.islamic-tabs-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.islamic-tabs-header {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tab-btn i {
+    font-size: 0.9rem;
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+.tab-btn.active {
+    color: #ffffff;
+    background: var(--accent-islamic);
+    border-color: var(--accent-islamic);
+    box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+.islamic-tabs-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 40px;
+    min-height: 280px;
+    position: relative;
+}
+
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Tab Content: Hadits */
+.hadits-box {
+    text-align: center;
+}
+
+.hadits-quote-arabic {
+    font-family: var(--font-arabic);
+    font-size: 2.2rem;
+    line-height: 1.8;
+    color: var(--accent-islamic);
+    margin-bottom: 24px;
+    direction: rtl;
+    padding: 0 20px;
+}
+
+.hadits-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hadits-translation {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    max-width: 750px;
+    margin: 0 auto 30px;
+}
+
+.hadits-explanation {
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-align: left;
+    max-width: 750px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.hadits-explanation strong {
+    color: var(--accent-islamic);
+    display: block;
+    margin-bottom: 6px;
+}
+
+/* Tab Content: Tahfidz */
+.tahfidz-tracker h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.tracker-desc {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.tahfidz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.tahfidz-item {
+    background: var(--bg-item);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 24px 16px;
+    text-align: center;
+    position: relative;
+    transition: var(--transition-normal);
+}
+
+.tahfidz-item.completed {
+    border-color: rgba(5, 150, 105, 0.25);
+    background: rgba(5, 150, 105, 0.05);
+}
+
+.tahfidz-item.in-progress {
+    border-color: rgba(2, 132, 199, 0.25);
+    background: rgba(2, 132, 199, 0.05);
+}
+
+.juz-num {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.tahfidz-item.completed .juz-num {
+    color: var(--accent-islamic);
+}
+
+.tahfidz-item.in-progress .juz-num {
+    color: var(--accent-tech);
+}
+
+.juz-status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.tahfidz-item.completed .juz-status {
+    color: var(--accent-islamic);
+}
+
+.tahfidz-item.in-progress .juz-status {
+    color: var(--accent-tech);
+}
+
+.progress-mini {
+    width: 80%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    margin: 12px auto 0;
+    overflow: hidden;
+}
+
+.progress-mini-bar {
+    height: 100%;
+    background-color: var(--accent-tech);
+}
+
+/* Tab Content: Qiroati */
+.qiroati-details h3, .ulumul-details h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.qiroati-details > p, .ulumul-details > p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+.qiroati-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.q-feat {
+    background: var(--bg-item);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+}
+
+.q-feat i {
+    font-size: 1.8rem;
+    color: var(--accent-islamic);
+    margin-bottom: 16px;
+}
+
+.q-feat h5 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.q-feat p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Tab Content: Ulumul Qur'an */
+.ulumul-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ulumul-list li {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.ulumul-list li i {
+    color: var(--accent-islamic);
+    margin-top: 4px;
+    font-size: 1rem;
+}
+
+.ulumul-list li div {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.ulumul-list li strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* ==========================================================================
+   MODUL 5: KETANGKASAN BELA DIRI (MARTIAL ARTS)
+   ========================================================================== */
+.martial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.martial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.martial-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 171, 0, 0.2);
+    box-shadow: var(--shadow-lg);
+}
+
+.martial-img-wrapper {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.martial-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-normal);
+}
+
+.martial-card:hover .martial-img-wrapper img {
+    scale: 1.05;
+}
+
+.martial-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 171, 0, 0.3);
+    color: var(--accent-martial);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.martial-content {
+    padding: 32px;
+}
+
+.martial-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.martial-intro {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+.martial-points {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.martial-points li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.martial-points li i {
+    color: var(--accent-martial);
+    font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   MODUL 6: PROYEK & PENCAPAIAN (PORTFOLIO)
+   ========================================================================== */
+.portfolio-filter {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    border-radius: 100px;
+    background: var(--bg-item);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.filter-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+.filter-btn.active {
+    color: #ffffff;
+    background: var(--gradient-primary);
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    transition: var(--transition-normal);
+}
+
+.portfolio-item-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.portfolio-item-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-lg);
+}
+
+.item-img-wrapper {
+    height: 180px;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.item-placeholder-img {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+}
+
+.tech-bg {
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.05) 0%, rgba(21, 114, 182, 0.1) 100%);
+    color: var(--accent-tech);
+}
+
+.islamic-bg {
+    background: linear-gradient(135deg, rgba(0, 230, 118, 0.05) 0%, rgba(0, 118, 0, 0.1) 100%);
+    color: var(--accent-islamic);
+}
+
+.martial-bg {
+    background: linear-gradient(135deg, rgba(255, 171, 0, 0.05) 0%, rgba(255, 111, 0, 0.1) 100%);
+    color: var(--accent-martial);
+}
+
+.cert-bg {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.05) 0%, rgba(103, 58, 183, 0.1) 100%);
+    color: var(--accent-cert);
+}
+
+.item-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.item-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-tech);
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+.portfolio-item-card[data-category="islamic"] .item-tag {
+    color: var(--accent-islamic);
+}
+
+.portfolio-item-card[data-category="physical"] .item-tag {
+    color: var(--accent-martial);
+}
+
+.portfolio-item-card[data-category="cert"] .item-tag {
+    color: var(--accent-cert);
+}
+
+.portfolio-item-card[data-category="cert"] .item-link {
+    color: var(--accent-cert);
+}
+
+/* Kategori Juara (Gold/Martial Theme) */
+.portfolio-item-card[data-category="juara"] .item-tag {
+    color: var(--accent-martial);
+}
+
+.portfolio-item-card[data-category="juara"] .item-link {
+    color: var(--accent-martial);
+}
+
+.portfolio-item-card[data-category="juara"]:hover {
+    border-color: var(--accent-martial);
+    box-shadow: var(--glow-martial);
+}
+
+/* Kategori Partisipasi (Purple/Cert Theme) */
+.portfolio-item-card[data-category="partisipasi"] .item-tag {
+    color: var(--accent-cert);
+}
+
+.portfolio-item-card[data-category="partisipasi"] .item-link {
+    color: var(--accent-cert);
+}
+
+.portfolio-item-card[data-category="partisipasi"]:hover {
+    border-color: var(--accent-cert);
+    box-shadow: var(--glow-cert);
+}
+
+.item-content h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.item-content p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.item-link {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-tech);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.item-link:hover {
+    text-decoration: underline;
+}
+
+.item-status-done {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-islamic);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+}
+
+/* ==========================================================================
+   MODUL 7: KONTAK & JEJARING (CONTACT)
+   ========================================================================== */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.contact-info-panel h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.contact-lead-text {
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.info-item {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-item);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--accent-tech);
+}
+
+.info-text span {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.info-text a, .info-text strong {
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+.info-text a:hover {
+    color: var(--accent-tech);
+}
+
+.download-cv-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.download-cv-box h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.download-cv-box p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+/* Contact Form Styling */
+.glass-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(var(--blur-strength));
+    -webkit-backdrop-filter: blur(var(--blur-strength));
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--accent-tech);
+    box-shadow: 0 0 8px rgba(2, 132, 199, 0.2);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-feedback {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: none;
+    text-align: center;
+}
+
+.form-feedback.success {
+    display: block;
+    background: rgba(0, 230, 118, 0.1);
+    color: var(--accent-islamic);
+    border: 1px solid rgba(0, 230, 118, 0.2);
+}
+
+.form-feedback.error {
+    display: block;
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.main-footer {
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-primary);
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.footer-subtext {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.footer-socials a {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.footer-socials a:hover {
+    color: var(--accent-tech);
+}
+
+/* ==========================================================================
+   ANIMATIONS & KEYFRAMES
+   ========================================================================== */
+@keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.5); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 230, 118, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 230, 118, 0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+    40% { transform: translateY(-10px) translateX(-50%); }
+    60% { transform: translateY(-5px) translateX(-50%); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Cursor Typing effect animation rules */
+.typing::after {
+    content: '|';
+    animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { color: transparent; }
+    50% { color: var(--accent-tech); }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN BREAKPOINTS
+   ========================================================================== */
+@media (max-width: 1024px) {
+    html { font-size: 15px; }
+    .hero-grid { gap: 40px; }
+    .hero-text h1 { font-size: 3.2rem; }
+    .about-grid { gap: 40px; }
+    .contact-grid { gap: 30px; }
+}
+
+@media (max-width: 900px) {
+    .sec-padding { padding: 80px 0; }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 50px;
+    }
+    
+    .hero-text {
+        order: 2;
+    }
+    
+    .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .social-links-container {
+        justify-content: center;
+    }
+    
+    .hero-visual {
+        order: 1;
+        margin-bottom: 20px;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .qiroati-features {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .martial-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info-panel {
+        order: 2;
+    }
+    
+    .contact-form-panel {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Mobile Menu Drawer Toggle */
+    .nav-toggle {
+        display: block;
+        cursor: pointer;
+        z-index: 1002;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: -260px; /* Sembunyikan di sebelah kiri layar */
+        width: 260px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-right: 1px solid var(--border-color);
+        border-bottom: none;
+        padding: 100px 24px;
+        transition: var(--transition-normal);
+        z-index: 1001;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .nav-menu.open {
+        left: 0; /* Geser masuk dari kiri */
+        top: 0;
+    }
+    
+    .nav-menu ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        width: 100%;
+    }
+    
+    .nav-link {
+        font-size: 1rem;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 12px 16px;
+    }
+    
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    html { font-size: 14px; }
+    .hero-text h1 { font-size: 2.6rem; }
+    .hero-buttons { flex-direction: column; width: 100%; }
+    .hero-buttons .btn { width: 100%; }
+    .islamic-tabs-content { padding: 24px 16px; }
+    .hadits-quote-arabic { font-size: 1.6rem; }
+    .profile-card-glowing { width: 270px; height: 310px; }
+    .profile-image-wrapper { height: 220px; }
+}
+
+/* ==========================================================================
+   VIBRANT PORTFOLIO DESIGN UPGRADES
+   ========================================================================== */
+
+/* 1. Glowing Background Blobs */
+.glow-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.glow-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15; /* Soft, elegant glow on light theme */
+    animation: float-blob 25s infinite alternate ease-in-out, rotate-hue 35s infinite linear;
+}
+
+.blob-cyan {
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--accent-tech) 0%, rgba(2, 132, 199, 0) 70%);
+    top: -10vw;
+    left: -10vw;
+    animation-duration: 20s;
+}
+
+.blob-emerald {
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, var(--accent-islamic) 0%, rgba(5, 150, 105, 0) 70%);
+    bottom: -10vw;
+    right: -10vw;
+    animation-duration: 28s;
+    animation-delay: -5s;
+}
+
+.blob-amber {
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, var(--accent-martial) 0%, rgba(217, 119, 6, 0) 70%);
+    top: 40vh;
+    right: 15vw;
+    animation-duration: 22s;
+    animation-delay: -10s;
+}
+
+.blob-purple {
+    width: 35vw;
+    height: 35vw;
+    background: radial-gradient(circle, var(--accent-cert) 0%, rgba(124, 58, 237, 0) 70%);
+    bottom: 20vh;
+    left: 15vw;
+    animation-duration: 32s;
+    animation-delay: -15s;
+}
+
+@keyframes float-blob {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+        transform: translate(8vw, 6vh) scale(1.1) rotate(180deg);
+    }
+    100% {
+        transform: translate(-5vw, -8vh) scale(0.95) rotate(360deg);
+    }
+}
+
+@keyframes rotate-hue {
+    0% { filter: blur(100px) hue-rotate(0deg); }
+    100% { filter: blur(100px) hue-rotate(360deg); }
+}
+
+/* 2. Vibrant Gradient Text Upgrades */
+.highlight-text,
+.gradient-text-active {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    animation: text-glow-flow 8s infinite linear;
+    background-size: 300% auto;
+}
+
+.section-title,
+.section-header h2 {
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-tech) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+/* Specific Section Theme Headings */
+#islamic .section-header h2 {
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-islamic) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#martial-arts .section-header h2 {
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-martial) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#portfolio .section-header h2 {
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-cert) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes text-glow-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 3. Glowing Card Hover States */
+.tech-card:hover {
+    border-color: var(--accent-tech);
+    box-shadow: var(--glow-tech);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.pillar-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+#pillar-tech:hover {
+    border-color: var(--accent-tech);
+    box-shadow: var(--glow-tech);
+}
+#pillar-spirit:hover {
+    border-color: var(--accent-islamic);
+    box-shadow: var(--glow-islamic);
+}
+#pillar-physical:hover {
+    border-color: var(--accent-martial);
+    box-shadow: var(--glow-martial);
+}
+
+.tahfidz-item.completed:hover {
+    border-color: var(--accent-islamic);
+    box-shadow: var(--glow-islamic);
+    transform: translateY(-5px);
+}
+.tahfidz-item.in-progress:hover {
+    border-color: var(--accent-tech);
+    box-shadow: var(--glow-tech);
+    transform: translateY(-5px);
+}
+
+.q-feat:hover {
+    border-color: var(--accent-islamic);
+    box-shadow: var(--glow-islamic);
+    transform: translateY(-5px);
+}
+
+.martial-card:hover {
+    border-color: var(--accent-martial);
+    box-shadow: var(--glow-martial);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.portfolio-item-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.portfolio-item-card[data-category="tech"]:hover {
+    box-shadow: var(--glow-tech);
+    border-color: var(--accent-tech);
+}
+
+.portfolio-item-card[data-category="islamic"]:hover {
+    box-shadow: var(--glow-islamic);
+    border-color: var(--accent-islamic);
+}
+
+.portfolio-item-card[data-category="physical"]:hover {
+    box-shadow: var(--glow-martial);
+    border-color: var(--accent-martial);
+}
+
+.portfolio-item-card[data-category="cert"]:hover {
+    box-shadow: var(--glow-cert);
+    border-color: var(--accent-cert);
+}
+
+/* 4. Glowing Buttons Upgrades */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: var(--transition-normal);
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    z-index: -1;
+    transition: opacity var(--transition-normal);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+    transform: translateY(-2px);
+}
